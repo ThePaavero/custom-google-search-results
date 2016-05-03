@@ -12,7 +12,8 @@ var CustomSearchResults = function () {
 
     var settings = {
         'matchesToActions': {
-            'https://groups.google.com/': ['Dim:0.7']
+            'https://groups.google.com/': ['Dim:0.5'],
+            'stackoverflow.com/': ['Highlight']
         }
     };
 
@@ -49,6 +50,9 @@ var CustomSearchResults = function () {
     this.actions = {
         'Dim': function (rowElement, opacity) {
             rowElement.style.opacity = opacity;
+        },
+        'Highlight': function (rowElement) {
+            rowElement.classList.add('csr-highlight');
         }
     };
 
