@@ -3,7 +3,9 @@ chrome.extension.sendMessage({}, function (response) {
         if (document.readyState === "complete") {
             clearInterval(readyStateCheckInterval);
             var extension = new CustomSearchResults();
-            extension.init();
+            setInterval(function () {
+                extension.init();
+            }, 100);
         }
     }, 10);
 });
@@ -13,7 +15,8 @@ var CustomSearchResults = function () {
     var settings = {
         'matchesToActions': {
             'https://groups.google.com/': ['Dim:0.5'],
-            'stackoverflow.com/': ['Highlight']
+            'stackoverflow.com/': ['Highlight'],
+            'www.w3schools.com/': ['Dim:0.2']
         }
     };
 
@@ -23,6 +26,10 @@ var CustomSearchResults = function () {
         var resultRows = document.querySelectorAll('.rc');
         for (var i = 0; i < resultRows.length; i ++) {
             var row = resultRows[i];
+            if (row.getAttribute('csr-processed')) {
+                continue;
+            }
+            row.setAttribute('csr-processed', true);
             processResultRow(row);
         }
     };
