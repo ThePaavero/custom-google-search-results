@@ -17,7 +17,8 @@ var CustomSearchResults = function () {
             'https://groups.google.com/': ['Dim:0.5'],
             'stackoverflow.com/': ['Highlight'],
             'www.w3schools.com/': ['Dim:0.2'],
-            'https://en.wikipedia.org/wiki/': ['Wikipedia']
+            'https://en.wikipedia.org/wiki/': ['Wikipedia'],
+            'https://www.reddit.com/r/': ['Reddit']
         }
     };
 
@@ -51,6 +52,10 @@ var CustomSearchResults = function () {
                         self.actions[me](rowElement);
                     }
                 }
+            } else {
+                var citeMarkup = rowElement.querySelector('cite').innerHTML;
+                var className = 'csr-domain-' + stringIntoClassName(citeMarkup);
+                rowElement.classList.add(className);
             }
         }
     };
@@ -64,7 +69,18 @@ var CustomSearchResults = function () {
         },
         'Wikipedia': function (rowElement) {
             rowElement.classList.add('csr-wikipedia');
+        },
+        'Reddit': function (rowElement) {
+            rowElement.classList.add('csr-reddit');
         }
+    };
+
+    var stringIntoClassName = function (string) {
+        var regex = /(?:[\w-]+\.)+[\w-]+/;
+        var domain = regex.exec(string)[0];
+        className = domain.replace(/\./g, '-');
+
+        return className;
     };
 
 };
