@@ -1,3 +1,7 @@
 .csr-highlight {
-	border: solid 1px lawngreen;
+	/*border: solid 1px #d4ff2b;*/
+	background-color: #d4ff2b;
+}
+.csr-wikipedia {
+	background-color: #c9e3ff;
 }

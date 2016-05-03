@@ -16,7 +16,8 @@ var CustomSearchResults = function () {
         'matchesToActions': {
             'https://groups.google.com/': ['Dim:0.5'],
             'stackoverflow.com/': ['Highlight'],
-            'www.w3schools.com/': ['Dim:0.2']
+            'www.w3schools.com/': ['Dim:0.2'],
+            'https://en.wikipedia.org/wiki/': ['Wikipedia']
         }
     };
 
@@ -35,11 +36,11 @@ var CustomSearchResults = function () {
     };
 
     var processResultRow = function (rowElement) {
-        var markup = rowElement.innerHTML;
+        var sourceElement = rowElement.querySelector('cite');
         for (var i in settings.matchesToActions) {
             var matchUrl = i;
             var actions = settings.matchesToActions[i];
-            if (markup.indexOf(matchUrl) > - 1) {
+            if (sourceElement.innerHTML.indexOf(matchUrl) > - 1) {
                 for (var n in actions) {
                     var me = actions[n];
                     if (me.indexOf(':') > - 1) {
@@ -60,6 +61,9 @@ var CustomSearchResults = function () {
         },
         'Highlight': function (rowElement) {
             rowElement.classList.add('csr-highlight');
+        },
+        'Wikipedia': function (rowElement) {
+            rowElement.classList.add('csr-wikipedia');
         }
     };
 
