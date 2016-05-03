@@ -12,7 +12,7 @@ var CustomSearchResults = function () {
 
     var settings = {
         'matchesToActions': {
-            'https://groups.google.com/': ['Dim']
+            'https://groups.google.com/': ['Dim:0.7']
         }
     };
 
@@ -33,16 +33,22 @@ var CustomSearchResults = function () {
             var actions = settings.matchesToActions[i];
             if (markup.indexOf(matchUrl) > - 1) {
                 for (var n in actions) {
-                    var method = self.actions[actions[n]];
-                    method(rowElement);
+                    var me = actions[n];
+                    if (me.indexOf(':') > - 1) {
+                        var bits = me.split(':');
+                        var extraArgument = bits[1];
+                        self.actions[bits[0]](rowElement, extraArgument);
+                    } else {
+                        self.actions[me](rowElement);
+                    }
                 }
             }
         }
     };
 
     this.actions = {
-        'Dim': function (rowElement) {
-            rowElement.style.opacity = 0.2;
+        'Dim': function (rowElement, opacity) {
+            rowElement.style.opacity = opacity;
         }
     };
 
