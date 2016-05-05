@@ -2,8 +2,8 @@
   "name": "Custom Search Results",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Add some domain specific styles to your Google search results.",
+  "homepage_url": "https://github.com/ThePaavero/custom-google-search-results",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
