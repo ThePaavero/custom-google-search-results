@@ -53,8 +53,9 @@ var CustomSearchResults = function () {
                     }
                 }
             } else {
-                var citeMarkup = rowElement.querySelector('cite').innerHTML;
+                var citeMarkup = rowElement.querySelector('cite').innerText;
                 var className = 'csr-domain-' + stringIntoClassName(citeMarkup);
+                rowElement.classList.add('csr-guessed-domain');
                 rowElement.classList.add(className);
             }
         }
