@@ -41,7 +41,7 @@ var CustomSearchResults = function () {
         for (var i in settings.matchesToActions) {
             var matchUrl = i;
             var actions = settings.matchesToActions[i];
-            if (sourceElement.innerHTML.indexOf(matchUrl) > - 1) {
+            if (sourceElement.innerText.indexOf(matchUrl) > - 1) {
                 for (var n in actions) {
                     var me = actions[n];
                     if (me.indexOf(':') > - 1) {
@@ -77,7 +77,11 @@ var CustomSearchResults = function () {
 
     var stringIntoClassName = function (string) {
         var regex = /(?:[\w-]+\.)+[\w-]+/;
-        var domain = regex.exec(string)[0];
+        var domain = regex.exec(string);
+        if (domain === null) {
+            return '';
+        }
+        domain = domain[0];
         className = domain.replace(/\./g, '-');
 
         return className;
